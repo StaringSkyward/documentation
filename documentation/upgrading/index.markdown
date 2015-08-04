@@ -136,3 +136,13 @@ Capistrano 3 now runs the `deploy:cleanup` task as part of the standard deploy w
 ```ruby
 set :keep_releases, 10
 ```
+
+#### Before and After Hooks
+
+Capistrano 2 allowed multiple `before` or `after` hooks to be defined. For example, it was common to see something like the following which would run the `web:disable` task then the `db:backup` task before the `deploy` task:
+
+```ruby
+before "deploy", "deploy:web:disable", "db:backup"
+```
+
+This will not work in Capistrano 3 - `db:backup` and any subsequent tasks will be ignored.
